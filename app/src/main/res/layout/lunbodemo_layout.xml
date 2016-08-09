@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="#eee"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/defalut"
+        android:text="轮播图"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        />
+    <com.example.administrator.myapplication.lunbo.ImageCycleView
+        android:layout_marginTop="6dp"
+        android:id="@+id/ad_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ></com.example.administrator.myapplication.lunbo.ImageCycleView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/defalut"
+        android:text="友盟分享"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        />
+</LinearLayout>

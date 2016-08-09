@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/gethttp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="get" />
+
+            <TextView
+                android:id="@+id/gettext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/posthttp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="post" />
+
+            <TextView
+                android:id="@+id/getpost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/shangchuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上传" />
+
+            <Button
+                android:id="@+id/download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下载" />
+
+            <Button
+                android:id="@+id/getimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="显示图片" />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

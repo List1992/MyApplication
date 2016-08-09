@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/icon1"
+        android:icon="@drawable/qq_press"
+        android:showAsAction="always"
+        android:title="@string/menu1"
+        ></item>
+
+    <item
+        android:id="@+id/icon2"
+        android:icon="@drawable/weixin_press"
+        android:showAsAction="always"
+        android:title="@string/menu2"
+        ></item>
+</menu>

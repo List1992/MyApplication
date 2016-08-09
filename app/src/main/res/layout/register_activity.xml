@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    >
+
+    <RelativeLayout
+        android:id="@+id/goBack"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#2ad4da"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/img"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/left_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/img"
+            android:text="返回"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/goBack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/telphone"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:hint="请输入您的手机号"
+            android:inputType="phone|number"
+            />
+
+        <TextView
+            android:id="@+id/msg"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="*手机号只用于平台验证，不会向第三方提供"
+            android:textColor="#f00"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:enabled="false"
+                android:inputType="number"
+                android:hint="请输入验证码" />
+
+            <Button
+                android:id="@+id/getCode"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="#2ad4da"
+                android:text="获取验证码"
+                android:textColor="#fff" />
+            <Button
+                android:visibility="gone"
+                android:id="@+id/start"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="#f00"
+                android:text="59秒后重新获取"
+                android:textColor="#000" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/pwd"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:enabled="false"
+            android:hint="请设置新的6-16位密码"
+            android:inputType="textPassword"
+            />
+
+        <EditText
+            android:id="@+id/repwd"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:enabled="false"
+            android:hint="请确认密码"
+            android:inputType="textPassword"
+            />
+
+        <Button
+            android:id="@+id/doRegister"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:enabled="false"
+            android:background="#2ad4da"
+            android:text="立即注册"
+            android:textColor="#fff"/>
+    </LinearLayout>
+</RelativeLayout>

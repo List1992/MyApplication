@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/defalut"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/volley"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_left_bg_selector"
+            android:gravity="center"
+            android:text="volley"
+            android:textColor="@drawable/textcolor_selector"/>
+
+        <TextView
+            android:id="@+id/nohttp"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_right_bg_selector"
+            android:gravity="center"
+            android:text="nohttp"
+            android:textColor="@drawable/textcolor_selector"/>
+
+        <TextView
+            android:id="@+id/glide"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+
+            android:layout_weight="1"
+            android:background="@drawable/button_left_bg_selector"
+            android:gravity="center"
+            android:text="glide"
+            android:textColor="@drawable/textcolor_selector"/>
+
+        <TextView
+            android:id="@+id/okhttp"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_right_bg_selector"
+            android:gravity="center"
+            android:text="okhttp"
+            android:textColor="@drawable/textcolor_selector"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/volley_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/getVolley"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_selector"
+                    android:text="volley的get请求"
+
+                    android:textColor="@drawable/textcolor_selector"/>
+
+                <TextView
+                    android:id="@+id/tv_get"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/postVolley"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_selector"
+                    android:text="volley的post请求"
+                    android:textColor="@drawable/textcolor_selector"/>
+
+                <TextView
+                    android:id="@+id/tv_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/volleyloadImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_selector"
+                    android:text="volley加载图片"
+                    android:textColor="@drawable/textcolor_selector"/>
+
+                <ImageView
+                    android:id="@+id/volley_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+        </ScrollView>
+
+        <ScrollView
+            android:id="@+id/nohttp_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                >
+
+                <Button
+                    android:id="@+id/getnohttp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_selector"
+                    android:text="nohttp的get请求"
+                    android:textColor="@drawable/textcolor_selector"/>
+
+                <TextView
+                    android:id="@+id/notv_get"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/postnohttp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_selector"
+                    android:text="nohttp的post请求"
+                    android:textColor="@drawable/textcolor_selector"/>
+
+                <TextView
+                    android:id="@+id/notv_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/nohttploadImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_selector"
+                    android:text="nohttp加载图片"
+                    android:textColor="@drawable/textcolor_selector"/>
+
+                <ImageView
+                    android:id="@+id/nohttp_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </ScrollView>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/defalut"></View>
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/get_okhttp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_selector"
+                    android:text="okhttp的get请求"
+                    android:textColor="@drawable/textcolor_selector"/>
+
+                <TextView
+                    android:id="@+id/oktv_get"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/post_okhttp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_selector"
+                    android:text="okhttp的post请求"
+                    android:textColor="@drawable/textcolor_selector"/>
+
+                <TextView
+                    android:id="@+id/oktv_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/glideloadimage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_selector"
+                    android:text="glide加载图片"
+                    android:textColor="@drawable/textcolor_selector"/>
+
+                <ImageView
+                    android:id="@+id/glide_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

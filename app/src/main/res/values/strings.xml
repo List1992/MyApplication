@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">小鸟</string>
+    <string name="wei_xin">微信</string>
+    <string name="qq">QQ</string>
+    <string name="zone">空间</string>
+    <string name="find">发现</string>
+    <string name="menu1">菜单1</string>
+    <string name="menu2">菜单2</string>
+</resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.administrator.myapplication.MainActivity">
+
+    <view.MyLazyViewPager
+        android:id="@+id/MyLazyViewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="72dp"
+        android:visibility="gone"></view.MyLazyViewPager>
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="72dp"></FrameLayout>
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingTop="2dp">
+
+        <RadioButton
+            android:id="@+id/weixin"
+            style="@style/radio_button"
+            android:drawableTop="@drawable/weixin_selector"
+            android:text="@string/wei_xin" />
+
+        <RadioButton
+            android:id="@+id/qq"
+            style="@style/radio_button"
+            android:drawableTop="@drawable/qq_selector"
+            android:text="@string/qq" />
+
+        <RadioButton
+            android:id="@+id/find"
+            style="@style/radio_button"
+            android:drawableTop="@drawable/find_selector"
+            android:text="@string/find" />
+
+        <RadioButton
+            android:id="@+id/zone"
+            style="@style/radio_button"
+            android:layout_width="0dp"
+            android:drawableTop="@drawable/zone_selector"
+            android:text="@string/zone" />
+
+    </RadioGroup>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/radiogroup"
+        android:background="#ddd" />
+</RelativeLayout>
