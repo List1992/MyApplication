@@ -185,7 +185,7 @@ public class BaiduMapActivity extends AppCompatActivity {
                     public void onGetReverseGeoCodeResult(ReverseGeoCodeResult arg0) {
                         //获取点击的坐标地址
                         address = arg0.getAddress();
-                        Log.i("tao", "address=" + address);
+                        Log.i("tao", "当前位置：" + address);
                         Toastutils.showToast(BaiduMapActivity.this, address);
                     }
 
