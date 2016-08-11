@@ -17,6 +17,8 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.administrator.myapplication.activity.BaiduMapActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -29,6 +31,7 @@ public class SplashActivity extends AppCompatActivity {
     LinearLayout ll;
     @BindView(R.id.splash_img)
     ImageView splash_img;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +52,8 @@ public class SplashActivity extends AppCompatActivity {
             //跳转到主页面
             if (msg.what == Start_Main) {
                 Log.i("tao", "收到消息后准备跳转到主页面");
-                MainActivity2.startMain(SplashActivity.this);
+                //  MainActivity2.startMain(SplashActivity.this);
+                startActivity(new Intent(SplashActivity.this, BaiduMapActivity.class));
                 finish();
             }
         }

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -14,20 +15,31 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.Poi;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.utils.MyOrientationListener;
+import com.example.administrator.myapplication.utils.ToastUtils;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import view.Toastutils;
 
 /**
  * Created by lisongtao on 2016/8/2 15:25.
@@ -96,6 +108,9 @@ public class BaiduMapActivity extends AppCompatActivity {
             "地图模式【罗盘】"};
     private int mCurrentStyle = 0;
 
+    private BitmapDescriptor bitmap;
+    private String address = "";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +124,15 @@ public class BaiduMapActivity extends AppCompatActivity {
 
         //获取地图
         mBaiduMap = mMapView.getMap();
+
+        //设置是否显示比例尺控件（默认显示）
+        mMapView.showScaleControl(false);
+        //设置是否显示缩放控件（默认显示）
+        mMapView.showZoomControls(false);
+        // 删除百度地图LoGo（默认显示）
+        mMapView.removeViewAt(1);
+
+
         //设置地图缩放比例
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
         mBaiduMap.setMapStatus(msu);
@@ -117,8 +141,62 @@ public class BaiduMapActivity extends AppCompatActivity {
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true);// 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
-        // option.setScanSpan(1000);//一秒请求一次
+        //option.setScanSpan(1000);//一秒请求一次
         mLocationClient.setLocOption(option);
+
+
+        // 设置marker图标
+        bitmap = BitmapDescriptorFactory.fromResource(R.drawable.maker);
+        //地图点击事件
+        mBaiduMap.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
+
+
+            @Override
+            public boolean onMapPoiClick(MapPoi mapPoi) {
+                return false;
+            }
+
+            //此方法就是点击地图监听
+            @Override
+            public void onMapClick(LatLng latLng) {
+                //获取经纬度
+                double latitude = latLng.latitude;
+                double longitude = latLng.longitude;
+                Log.i("tao", "latitude=" + latitude + ",longitude=" + longitude);
+                //先清除图层
+                mBaiduMap.clear();
+                // 定义Maker坐标点
+                LatLng point = new LatLng(latitude, longitude);
+                // 构建MarkerOption，用于在地图上添加Marker
+                MarkerOptions options = new MarkerOptions().position(point)
+                        .icon(bitmap);
+                // 在地图上添加Marker，并显示
+                mBaiduMap.addOverlay(options);
+                //实例化一个地理编码查询对象
+                GeoCoder geoCoder = GeoCoder.newInstance();
+                //设置反地理编码位置坐标
+                ReverseGeoCodeOption op = new ReverseGeoCodeOption();
+                op.location(latLng);
+                //发起反地理编码请求(经纬度->地址信息)
+                geoCoder.reverseGeoCode(op);
+                geoCoder.setOnGetGeoCodeResultListener(new OnGetGeoCoderResultListener() {
+
+                    @Override
+                    public void onGetReverseGeoCodeResult(ReverseGeoCodeResult arg0) {
+                        //获取点击的坐标地址
+                        address = arg0.getAddress();
+                        Log.i("tao", "address=" + address);
+                        Toastutils.showToast(BaiduMapActivity.this, address);
+                    }
+
+                    @Override
+                    public void onGetGeoCodeResult(GeoCodeResult arg0) {
+                    }
+                });
+            }
+        });
+
+
     }
 
 
@@ -129,6 +207,7 @@ public class BaiduMapActivity extends AppCompatActivity {
     //    高精度定位模式：这种定位模式下，会同时使用网络定位和GPS定位，优先返回最高精度的定位结果；
 //    低功耗定位模式：这种定位模式下，不会使用GPS，只会使用网络定位（Wi-Fi和基站定位）；
 //    仅用设备定位模式：这种定位模式下，不需要连接网络，只使用GPS进行定位，这种模式下不支持室内环境的定位。
+
     private void initLocation() {
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
@@ -148,13 +227,23 @@ public class BaiduMapActivity extends AppCompatActivity {
     }
 
     private boolean isNormal = true;
+    private boolean islocal = false;
 
     @OnClick({R.id.location, R.id.map_common, R.id.map_traffic})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.location:
-                mBaiduMap.setMyLocationEnabled(true);
-                mLocationClient.start();
+                islocal = !islocal;
+                if (islocal) {
+                    mBaiduMap.setMyLocationEnabled(true);
+                    mLocationClient.start();
+                    mLocation.setText("不告诉你");
+                } else {
+                    mLocation.setText("我在哪儿");
+                    mBaiduMap.setMyLocationEnabled(false);
+                    mLocationClient.stop();
+                }
+
                 break;
             case R.id.map_common://卫星地图
                 isNormal = !isNormal;
@@ -179,6 +268,11 @@ public class BaiduMapActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    /**
+     * 是否是第一次定位
+     */
+    private boolean isFirst = true;
 
     //    第三步，实现BDLocationListener接口
 //    BDLocationListener接口有1个方法需要实现： 1.接收异步返回的定位结果，参数是BDLocation类型参数。
@@ -245,7 +339,6 @@ public class BaiduMapActivity extends AppCompatActivity {
                 }
             }
             Log.i("tao", sb.toString());
-
             // mapview 销毁后不在处理新接收的位置
             if (location == null || mMapView == null)
                 return;
@@ -253,12 +346,42 @@ public class BaiduMapActivity extends AppCompatActivity {
             MyLocationData data = new MyLocationData.Builder().accuracy(location.getRadius()).latitude(location.getLatitude()).longitude(location.getLongitude()).build();
             // 设置定位数据
             mBaiduMap.setMyLocationData(data);
-
-            //=根据经纬度，将地图位置移动到当前位置
+            // 设置自定义图标
+            BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory
+                    .fromResource(R.drawable.navi_map_gps_locked);
+            MyLocationConfiguration config = new MyLocationConfiguration(
+                    mCurrentMode, true, mCurrentMarker);
+            mBaiduMap.setMyLocationConfigeration(config);
+            //根据经纬度，将地图位置移动到当前位置
+//            if (isFirst) {
+//                isFirst = false;
             LatLng atlng = new LatLng(location.getLatitude(), location.getLongitude());
             MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(atlng);
             mBaiduMap.animateMapStatus(msu);
             //mBaiduMap.setMapStatus(msu);
+//            }
+
+
+            //实例化一个地理编码查询对象
+            GeoCoder geoCoder = GeoCoder.newInstance();
+            //设置反地理编码位置坐标
+            ReverseGeoCodeOption op = new ReverseGeoCodeOption();
+            op.location(atlng);
+            //发起反地理编码请求(经纬度->地址信息)
+            geoCoder.reverseGeoCode(op);
+
+            geoCoder.setOnGetGeoCodeResultListener(new OnGetGeoCoderResultListener() {
+                @Override
+                public void onGetGeoCodeResult(GeoCodeResult geoCodeResult) {
+
+                }
+
+                @Override
+                public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
+                    //根据经纬度，查询到对应的地址信息
+                    Toastutils.showToast(BaiduMapActivity.this, reverseGeoCodeResult.getAddress());
+                }
+            });
 
         }
 
@@ -278,8 +401,10 @@ public class BaiduMapActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+//        //开启定位功能
 //        mBaiduMap.setMyLocationEnabled(true);
 //        if (!mLocationClient.isStarted()) {
+//            //开始定位
 //            mLocationClient.start();
 //        }
 
@@ -288,6 +413,7 @@ public class BaiduMapActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        //关闭定位
         mBaiduMap.setMyLocationEnabled(false);
         mLocationClient.stop();
     }

@@ -25,8 +25,7 @@
             android:layout_marginRight="1dp"
             android:layout_weight="1"
             android:background="@color/defalut"
-            android:text="我的位置"
-            android:textColor="@color/white"
+            android:text="我在哪儿"
             />/
 
         <Button
@@ -37,7 +36,6 @@
             android:layout_weight="1"
             android:background="@color/defalut"
             android:text="卫星地图"
-            android:textColor="@color/white"
             />
 
         <Button
@@ -46,8 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/defalut"
-            android:text="开启实时交通"
-            android:textColor="@color/white"
+            android:text="开启交通图"
             />
 
 
