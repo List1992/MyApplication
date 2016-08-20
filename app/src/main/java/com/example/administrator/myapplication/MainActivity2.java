@@ -140,6 +140,7 @@ public class MainActivity2 extends AppCompatActivity implements RadioGroup.OnChe
         }
         return fragment;
 
+
     }
 
     //从其他页面跳转到MainActivity的方法
