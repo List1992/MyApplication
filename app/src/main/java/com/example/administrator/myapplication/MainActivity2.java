@@ -139,6 +139,7 @@ public class MainActivity2 extends AppCompatActivity implements RadioGroup.OnChe
             mFragments.add(fragmentTag, fragment);
         }
         return fragment;
+
     }
 
     //从其他页面跳转到MainActivity的方法
