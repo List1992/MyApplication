@@ -41,4 +41,5 @@ dependencies {
     compile files('D:/develop/MyApplication/libs/BaiduLBS_Android.jar')
     compile files('D:/develop/MyApplication/libs/IndoorscapeAlbumPlugin.jar')
     compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.qiushui:blurredview:0.8.1'
 }

@@ -52,8 +52,8 @@ public class SplashActivity extends AppCompatActivity {
             //跳转到主页面
             if (msg.what == Start_Main) {
                 Log.i("tao", "收到消息后准备跳转到主页面");
-                //  MainActivity2.startMain(SplashActivity.this);
-                startActivity(new Intent(SplashActivity.this, BaiduMapActivity.class));
+                MainActivity2.startMain(SplashActivity.this);
+                //startActivity(new Intent(SplashActivity.this, BaiduMapActivity.class));
                 finish();
             }
         }

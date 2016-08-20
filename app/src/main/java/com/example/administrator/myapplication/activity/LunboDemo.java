@@ -36,7 +36,7 @@ import view.Toastutils;
 
 /**
  * Created by lisongtao on 2016/7/29 11:39.
- * desc：
+ * desc：轮播图demo
  */
 public class LunboDemo extends AppCompatActivity {
 
