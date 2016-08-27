@@ -218,7 +218,7 @@ public class BaiduMapActivity extends AppCompatActivity implements OnGetPoiSearc
                         //获取点击的坐标地址
                         address = reverseGeoCodeResult.getAddress();
 
-                        //获取搜索到的所有的地址列表
+                        //获取搜索到的所有的地址列表的集合
                         List<PoiInfo> poiList = reverseGeoCodeResult.getPoiList();
 
                         //遍历地址列表集合，将所有的地址都添加覆盖物
@@ -275,7 +275,6 @@ public class BaiduMapActivity extends AppCompatActivity implements OnGetPoiSearc
                 }
                 double longitude = geoCodeResult.getLocation().longitude;
                 double latitude = geoCodeResult.getLocation().latitude;
-
                 //先清除图层
                 mBaiduMap.clear();
                 //添加marker
@@ -283,7 +282,7 @@ public class BaiduMapActivity extends AppCompatActivity implements OnGetPoiSearc
                 //将当前位置移动到屏幕中心点
                 moveTocenter(longitude, latitude);
 
-                Log.i("tao","地理编码查询（根据地址查询经纬度）");
+                Log.i("tao", "地理编码查询（根据地址查询经纬度）");
 
             }
 
@@ -291,7 +290,7 @@ public class BaiduMapActivity extends AppCompatActivity implements OnGetPoiSearc
             @Override
             public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
 
-                Log.i("tao","反地理编码查询（根据经纬度查询地址）");
+                Log.i("tao", "反地理编码查询（根据经纬度查询地址）");
             }
         });
     }
@@ -314,7 +313,7 @@ public class BaiduMapActivity extends AppCompatActivity implements OnGetPoiSearc
                 .icon(bitmap);
         // 在地图上添加Marker，并显示
         mBaiduMap.addOverlay(options);
-        
+
     }
 //    第二步，配置定位SDK参数
 //    设置定位参数包括：定位模式（高精度定位模式，低功耗定位模式和仅用设备定位模式），返回坐标类型，是否打开GPS，是否返回地址信息、位置语义化信息、POI信息等等。
@@ -500,7 +499,7 @@ public class BaiduMapActivity extends AppCompatActivity implements OnGetPoiSearc
             }
             sb.append("\nlocationdescribe : ");
             sb.append(location.getLocationDescribe());// 位置语义化信息
-            List<Poi> list = location.getPoiList();// POI数据
+            List<Poi> list = location.getPoiList();// 获取定位周边的位置列表
             if (list != null) {
                 sb.append("\npoilist size = : ");
                 sb.append(list.size());
@@ -666,7 +665,7 @@ public class BaiduMapActivity extends AppCompatActivity implements OnGetPoiSearc
         mBaiduMap.setMyLocationEnabled(false);
         mLocationClient.stop();
 
-        if(mPoiSearch!=null){
+        if (mPoiSearch != null) {
 
             mPoiSearch.destroy();
         }
@@ -682,7 +681,7 @@ public class BaiduMapActivity extends AppCompatActivity implements OnGetPoiSearc
         mMapView = null;
 
         mLocationClient.stop();
-        if(mPoiSearch!=null){
+        if (mPoiSearch != null) {
 
             mPoiSearch.destroy();
         }
@@ -700,7 +699,7 @@ public class BaiduMapActivity extends AppCompatActivity implements OnGetPoiSearc
         super.onPause();
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
         mMapView.onPause();
-        if(mPoiSearch!=null){
+        if (mPoiSearch != null) {
 
             mPoiSearch.destroy();
         }

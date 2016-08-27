@@ -3,6 +3,7 @@ package myFragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.administrator.myapplication.MainActivity;
 import com.example.administrator.myapplication.R;
 
 import butterknife.BindView;
@@ -47,22 +50,70 @@ public class FindFragment extends BaseFragment {
     @OnClick(R.id.btStart)
     public void onclick() {
 
-        if (mBtStart.isSelected()) {
+//        if (mBtStart.isSelected()) {
+//
+//            mBtStart.setSelected(false);
+//            new Thread(new Runnable() {//创建并启动线程，使用线程执行模拟的任务
+//                public void run() {
+//                    less();
+//                }
+//            }).start();
+//        } else {
+//            mBtStart.setSelected(true);
+//            new Thread(new Runnable() {//创建并启动线程，使用线程执行模拟的任务
+//                public void run() {
+//                    add();
+//                }
+//            }).start();
+//        }
+        add1();
+    }
 
-            mBtStart.setSelected(false);
-            new Thread(new Runnable() {//创建并启动线程，使用线程执行模拟的任务
-                public void run() {
-                    less();
+    private void add1() {
+
+        mPbPic.setMax(100);
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                while (true) {
+                    //休眠500ms
+                    SystemClock.sleep(100);
+                    //进度条每次增加一个单位
+                    mPbPic.incrementProgressBy(1);
+
+                    //达到最大值时，开始减少
+                    if (mPbPic.getMax() == mPbPic.getProgress()) {
+
+                        for (int i = 0; i < 100; i++) {
+
+                            mPbPic.incrementProgressBy(-1);
+                        }
+
+
+                    }
+                    //在主线程更新ui
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mPbPic.getProgress() > -1 && mPbPic.getProgress() <= 20) {
+
+                                mTxtProgress.setTextColor(Color.RED);
+                            } else if (mPbPic.getProgress() > 20 && mPbPic.getProgress() <= 70) {
+                                mTxtProgress.setTextColor(Color.BLUE);
+                            } else {
+
+                                mTxtProgress.setTextColor(Color.GREEN);
+                            }
+
+
+                            mTxtProgress.setText(mPbPic.getProgress() + "%");//显示完成的进度
+                        }
+                    });
+
                 }
-            }).start();
-        } else {
-            mBtStart.setSelected(true);
-            new Thread(new Runnable() {//创建并启动线程，使用线程执行模拟的任务
-                public void run() {
-                    add();
-                }
-            }).start();
-        }
+            }
+        }).start();
     }
 
     private void less() {

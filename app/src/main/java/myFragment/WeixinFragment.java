@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -75,6 +76,8 @@ public class WeixinFragment extends BaseFragment implements View.OnClickListener
         pDialog.setMessage("拼命加载中...");
         //设置加载匡的样式
         pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        //给进度条设置最大值
+        pDialog.setMax(100);
         return view;
     }
 
@@ -83,33 +86,27 @@ public class WeixinFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void initData() {
         //显示加载匡
-      //  pDialog.show();
+        pDialog.show();
 //        一般来说在工作线程中执行耗时任务，当任务完成时，会返回UI线程，一般是更新UI。这时有两种方法可以达到目的。
 //        一种是handler.sendMessage。发一个消息，再根据消息，执行相关任务代码。
 //        另一种是handler.post(r)。r是要执行的任务代码。意思就是说r的代码实际是在UI线程执行的。可以写更新UI的代码。（工作线程是不能更新UI的）
 
-//        new Thread(new Runnable() {//创建并启动线程，使用线程执行模拟的任务
-//            public void run() {
-//                for (int i = 1; i < 101; i++) { //循环100遍
-//                    if (i == 100) {
-//
-//                        pDialog.dismiss();
-//                    }
-//                    try {
-//                        handler.post(new Runnable() { //更新界面的数据
-//
-//                            public void run() {
-//                                pDialog.incrementProgressBy(1);//增加进度
-//                            }
-//                        });
-//                        Thread.sleep(100);
-//
-//                    } catch (InterruptedException e) {
-//
-//                    }
-//                }
-//            }
-//        }).start();
+        new Thread(new Runnable() {//创建并启动线程，使用线程执行模拟的任务
+            public void run() {
+                while (true) {
+                    //休眠100ms
+                    SystemClock.sleep(100);
+                    //进度条每次增加一个单位
+                    pDialog.incrementProgressBy(1);
+                    //进度条到头时退出
+                    if (pDialog.getMax() == pDialog.getProgress()) {
+                        pDialog.dismiss();
+
+                    }
+                }
+
+            }
+        }).start();
 
 
         //开始动画
