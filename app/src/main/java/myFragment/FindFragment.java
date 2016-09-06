@@ -1,19 +1,13 @@
 package myFragment;
 
 import android.graphics.Color;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.administrator.myapplication.MainActivity;
 import com.example.administrator.myapplication.R;
 
 import butterknife.BindView;
@@ -36,6 +30,8 @@ public class FindFragment extends BaseFragment {
 
     @Override
     public View inintView() {
+
+
         View view = getActivity().getLayoutInflater().inflate(R.layout.find_layout, null);
         ButterKnife.bind(this, view);
         return view;
@@ -67,6 +63,7 @@ public class FindFragment extends BaseFragment {
 //            }).start();
 //        }
         add1();
+        mBtStart.setEnabled(false);
     }
 
     private void add1() {
@@ -78,17 +75,46 @@ public class FindFragment extends BaseFragment {
             public void run() {
                 while (true) {
                     //休眠500ms
-                    SystemClock.sleep(100);
+                    SystemClock.sleep(200);
                     //进度条每次增加一个单位
                     mPbPic.incrementProgressBy(1);
 
                     //达到最大值时，开始减少
                     if (mPbPic.getMax() == mPbPic.getProgress()) {
 
-                        for (int i = 0; i < 100; i++) {
 
-                            mPbPic.incrementProgressBy(-1);
-                        }
+                        new Thread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                for (int i = 0; i < 100; i++) {
+                                        //以后每次休眠200ms
+                                        SystemClock.sleep(200);
+
+                                    //进度条每次增加一个单位
+                                    mPbPic.incrementProgressBy(-1);
+
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (mPbPic.getProgress() > -1 && mPbPic.getProgress() <= 20) {
+
+                                                mTxtProgress.setTextColor(Color.RED);
+                                            } else if (mPbPic.getProgress() > 20 && mPbPic.getProgress() <= 70) {
+                                                mTxtProgress.setTextColor(Color.BLUE);
+                                            } else {
+
+                                                mTxtProgress.setTextColor(Color.GREEN);
+                                            }
+
+
+                                            mTxtProgress.setText(mPbPic.getProgress() + "%");//显示完成的进度
+                                        }
+                                    });
+                                }
+
+                            }
+                        }).start();
 
 
                     }

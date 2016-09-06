@@ -52,9 +52,6 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="wQCmMksQpI3RYvNerQcarsSWUm9436vX"/>
 
-        <activity android:name=".MainActivity">
-
-        </activity>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
